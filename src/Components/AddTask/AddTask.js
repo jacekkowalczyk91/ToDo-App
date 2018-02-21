@@ -24,15 +24,33 @@ class AddTask extends React.Component {
         event.preventDefault()
         const tasks = database().ref('tasks')
         const task = {
-            name: this.state.taskName
+            taskName: this.state.taskName
         }
         tasks.push(task)
+        this.setState({
+            taskName: ''
+        })
+    }
+
+    componentDidMount() {
+        const tasks = database().ref('tasks');
+        tasks.on('value', (snapshot) => {
+            let tasks = snapshot.val();
+            let newState = [];
+            for (let task in tasks) {
+                newState.push({
+                    id: task,
+                    taskName: tasks[task].taskName
+                });
+            }
             this.setState({
-                taskName: ''
-            })
+                tasks: newState
+            });
+        });
     }
 
     render() {
+
         return (
             <div>
                 <form>
@@ -47,6 +65,19 @@ class AddTask extends React.Component {
                             onClick={this.handleAddTask}
                         >Zapisz</Button>
                     </FormGroup>
+                    <div>
+                        <ul>
+                            {
+                                this.state.tasks && this.state.tasks.map(
+                                    ({id, taskName}) => (
+                                        <li key={id}>{taskName}</li>
+
+                                    )
+                                )
+                            }
+                        </ul>
+
+                    </div>
                 </form>
             </div>
         )
