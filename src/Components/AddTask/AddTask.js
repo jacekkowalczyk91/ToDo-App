@@ -6,6 +6,7 @@ import {
 } from 'react-bootstrap'
 
 import {database} from '../../firebase'
+import './AddTask.css'
 
 class AddTask extends React.Component {
 
@@ -32,6 +33,10 @@ class AddTask extends React.Component {
         })
     }
 
+    handleRemoveTask = (id) => {
+        database().ref(`/tasks/${id}`).set(null)
+    }
+
     componentDidMount() {
         const tasks = database().ref('tasks');
         tasks.on('value', (snapshot) => {
@@ -54,7 +59,9 @@ class AddTask extends React.Component {
         return (
             <div>
                 <form>
-                    <FormGroup>
+                    <FormGroup
+                        className='form'
+                    >
                         <FormControl
                             type='text'
                             placeholder='nazwa zadania'
@@ -65,17 +72,21 @@ class AddTask extends React.Component {
                             onClick={this.handleAddTask}
                         >Zapisz</Button>
                     </FormGroup>
-                    <div>
-                        <ul>
-                            {
-                                this.state.tasks && this.state.tasks.map(
-                                    ({id, taskName}) => (
-                                        <li key={id}>{taskName}</li>
-
-                                    )
+                    <div className='view'>
+                        {
+                            this.state.tasks && this.state.tasks.map(
+                                ({id, taskName}) => (
+                                    <div>
+                                        <p key={id}>{taskName}</p>
+                                        <Button
+                                            onClick={() => {
+                                                this.handleRemoveTask(id)
+                                            }}
+                                        >Usuń</Button>
+                                    </div>
                                 )
-                            }
-                        </ul>
+                            )
+                        }
 
                     </div>
                 </form>
