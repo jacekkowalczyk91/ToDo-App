@@ -12,7 +12,8 @@ class AddTask extends React.Component {
 
     state = {
         id: '',
-        taskName: ''
+        taskName: '',
+        isDone: false
     }
 
     handleTaskNameInputChange = (event) => {
@@ -25,7 +26,8 @@ class AddTask extends React.Component {
         event.preventDefault()
         const tasks = database().ref('tasks')
         const task = {
-            taskName: this.state.taskName
+            taskName: this.state.taskName,
+            isDone: this.state.isDone
         }
         tasks.push(task)
         this.setState({
@@ -35,6 +37,13 @@ class AddTask extends React.Component {
 
     handleRemoveTask = (id) => {
         database().ref(`/tasks/${id}`).set(null)
+    }
+
+    handleCheckbox = (id) => {
+        this.setState({
+            isDone: !this.state.isDone
+        })
+        database().ref().child(`/tasks/${id}`).update({isDone:!this.state.isDone })
     }
 
     componentDidMount() {
@@ -83,6 +92,11 @@ class AddTask extends React.Component {
                                                 this.handleRemoveTask(id)
                                             }}
                                         >Usuń</Button>
+                                        <FormControl
+                                            type='checkbox'
+                                            onClick={() => {this.handleCheckbox(id)}}
+                                            defaultChecked={this.state.isDone}
+                                        />
                                     </div>
                                 )
                             )
