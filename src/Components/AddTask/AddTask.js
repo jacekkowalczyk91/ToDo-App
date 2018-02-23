@@ -13,25 +13,36 @@ class AddTask extends React.Component {
     state = {
         id: '',
         taskName: '',
-        isDone: false
+        isDone: false,
+        taskDescription: ''
     }
 
     handleTaskNameInputChange = (event) => {
         this.setState({
-            taskName: event.target.value
+            taskName: event.target.value,
         });
     }
+    handleTaskDescriptionChange = (event) => {
+        this.setState({
+            taskDescription: event.target.value
+        });
+    }
+
+
 
     handleAddTask = (event) => {
         event.preventDefault()
         const tasks = database().ref('tasks')
         const task = {
             taskName: this.state.taskName,
-            isDone: this.state.isDone
+            isDone: this.state.isDone,
+            taskDescription: this.state.taskDescription
         }
         tasks.push(task)
         this.setState({
-            taskName: ''
+            taskName: '',
+            taskDescription: ''
+
         })
     }
 
@@ -48,6 +59,12 @@ class AddTask extends React.Component {
                             placeholder='nazwa zadania'
                             onChange={this.handleTaskNameInputChange}
                             value={this.state.taskName}
+                        />
+                        <FormControl
+                            type='textarea'
+                            placeholder='treść zadania'
+                            onChange={this.handleTaskDescriptionChange}
+                            value={this.state.taskDescription}
                         />
                         <Button
                             onClick={this.handleAddTask}
