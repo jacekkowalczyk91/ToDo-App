@@ -43,7 +43,7 @@ class AddTask extends React.Component {
         this.setState({
             isDone: !this.state.isDone
         })
-        database().ref().child(`/tasks/${id}`).update({isDone:!this.state.isDone })
+        database().ref().child(`/tasks/${id}`).update({isDone:this.state.isDone})
     }
 
     componentDidMount() {

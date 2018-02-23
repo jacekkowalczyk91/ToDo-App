@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import AddTask from './Components/AddTask'
+import MainMenu from './Components/MainMenu'
 
 import { Grid } from 'react-bootstrap'
 
@@ -14,7 +15,8 @@ class App extends Component {
         return (
             <Router>
                 <Grid>
-                    <Route path='/' component={AddTask}/>
+                    <MainMenu/>
+                    <Route exact path='/AddTask' component={AddTask}/>
                 </Grid>
             </Router>
         )
