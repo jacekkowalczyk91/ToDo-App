@@ -9,6 +9,7 @@ import { Grid } from 'react-bootstrap'
 import {
     BrowserRouter as Router, Route
 }from 'react-router-dom'
+import FinishedTasks from "./Components/FinishedTasks";
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
                     <MainMenu/>
                     <Route exact path='/' component={Tasks}/>
                     <Route exact path='/AddTask' component={AddTask}/>
+                    <Route exact path='/FinishedTasks' component={FinishedTasks}/>
                 </Grid>
             </Router>
         )

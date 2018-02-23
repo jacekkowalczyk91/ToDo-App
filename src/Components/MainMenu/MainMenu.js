@@ -27,6 +27,9 @@ const MainMenu = () => (
                 <LinkContainer exact to="/AddTask">
                     <NavItem>Dodaj zadanie</NavItem>
                 </LinkContainer>
+                <LinkContainer exact to="/FinishedTasks">
+                    <NavItem>Ukończone zadania</NavItem>
+                </LinkContainer>
             </Nav>
         </Navbar.Collapse>
     </Navbar>

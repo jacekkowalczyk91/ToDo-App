@@ -11,7 +11,6 @@ class Tasks extends React.Component {
 
     state = {
         id: '',
-        taskName: '',
         isDone: false
     }
 
