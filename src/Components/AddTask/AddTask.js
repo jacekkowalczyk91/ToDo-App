@@ -39,11 +39,11 @@ class AddTask extends React.Component {
             taskDescription: this.state.taskDescription
         }
         tasks.push(task)
-        this.setState({
-            taskName: '',
-            taskDescription: ''
-
-        })
+        // this.setState({
+        //     taskName: '',
+        //     taskDescription: ''
+        //
+        // })
     }
 
     render() {

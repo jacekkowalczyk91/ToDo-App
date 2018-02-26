@@ -1,8 +1,7 @@
 import React from 'react'
 
 import {
-    Button,
-    FormControl
+    Button
 } from 'react-bootstrap'
 
 import {database} from '../../firebase'
@@ -18,12 +17,19 @@ class Tasks extends React.Component {
         database().ref(`/tasks/${id}`).set(null)
     }
 
-    handleCheckbox = (id) => {
+    handleCheckbox = (id, event) => {
+        // event.preventDefault()
+        // const task = this.state.tasks.find(task => task.id === id)
+
         this.setState({
             isDone: !this.state.isDone
-        })
-        database().ref().child(`/tasks/${id}`).update({isDone:this.state.isDone})
+        });
+        console.log('zmiana stanu')
+        // database().ref(`/tasks/` + id).set({isDone: false})
+
+        // database().ref().child(`/tasks/${id}`).update({isDone:!this.state.isDone})
     }
+
 
     componentDidMount() {
         const tasks = database().ref('tasks');
@@ -43,7 +49,7 @@ class Tasks extends React.Component {
         });
     }
 
-    render(){
+    render() {
         return (
             <div className='view'>
                 {
@@ -57,11 +63,13 @@ class Tasks extends React.Component {
                                         this.handleRemoveTask(id)
                                     }}
                                 >Usuń</Button>
-                                <FormControl
-                                    type='checkbox'
-                                    onClick={() => {this.handleCheckbox(id)}}
-                                    defaultChecked={this.state.isDone}
-                                />
+                                <Button
+                                    onClick={this.handleCheckbox}
+                                >{
+                                    this.state.isDone ?
+                                        'mark as undone' :
+                                        'mark as done'
+                                }</Button>
                             </div>
                         )
                     )
