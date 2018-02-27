@@ -17,17 +17,11 @@ class Tasks extends React.Component {
         database().ref(`/tasks/${id}`).set(null)
     }
 
-    handleCheckbox = (id, event) => {
-        // event.preventDefault()
-        // const task = this.state.tasks.find(task => task.id === id)
-
+    handleToggleDone = (id) => {
         this.setState({
             isDone: !this.state.isDone
         });
-        console.log('zmiana stanu')
-        database().ref(`/tasks/` + id).set({isDone: false})
-
-        // database().ref().child(`/tasks/${id}`).update({isDone:!this.state.isDone})
+        database().ref(`/tasks/${id}`).update({isDone: !this.state.isDone})
     }
 
 
@@ -63,7 +57,9 @@ class Tasks extends React.Component {
                                     }}
                                 >Usuń</Button>
                                 <Button
-                                    onClick={this.handleCheckbox}
+                                    onClick={() => {
+                                        this.handleToggleDone(id)
+                                    }}
                                 >{
                                     this.state.isDone ?
                                         'mark as undone' :
