@@ -25,7 +25,7 @@ class Tasks extends React.Component {
             isDone: !this.state.isDone
         });
         console.log('zmiana stanu')
-        // database().ref(`/tasks/` + id).set({isDone: false})
+        database().ref(`/tasks/` + id).set({isDone: false})
 
         // database().ref().child(`/tasks/${id}`).update({isDone:!this.state.isDone})
     }
@@ -56,8 +56,7 @@ class Tasks extends React.Component {
                     this.state.tasks && this.state.tasks.map(
                         ({id, taskName, taskDescription}) => (
                             <div>
-                                <p key={id}>{taskName}</p>
-                                <p key={id}>{taskDescription}</p>
+                                <p key={id}>{taskName}{taskDescription}</p>
                                 <Button
                                     onClick={() => {
                                         this.handleRemoveTask(id)

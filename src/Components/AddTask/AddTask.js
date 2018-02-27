@@ -13,7 +13,6 @@ class AddTask extends React.Component {
     state = {
         id: '',
         taskName: '',
-        isDone: false,
         taskDescription: ''
     }
 
@@ -30,20 +29,12 @@ class AddTask extends React.Component {
 
 
 
-    handleAddTask = (event) => {
-        event.preventDefault()
-        const tasks = database().ref('tasks')
-        const task = {
+    handleAddTask = () => {
+        database().ref(`tasks/`).push({
             taskName: this.state.taskName,
-            isDone: this.state.isDone,
-            taskDescription: this.state.taskDescription
-        }
-        tasks.push(task)
-        // this.setState({
-        //     taskName: '',
-        //     taskDescription: ''
-        //
-        // })
+            taskDescription: this.state.taskDescription,
+            isDone: false,
+        })
     }
 
     render() {
