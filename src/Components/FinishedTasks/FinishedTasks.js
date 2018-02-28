@@ -31,14 +31,9 @@ class FinishedTasks extends React.Component {
             <div>
                 {
                     this.state.tasks && this.state.tasks.map(
-                        ({id, taskName, taskDescription, isDone}) => {
-                            return this.state.isDone === true ? <div>
-                                <p key={id}>{taskName}</p>
-                            </div> : <div>
-                                <p>brak ukonczonych zadan</p>
-                            </div>
-
-                }
+                        ({id, taskName, taskDescription}) => (
+                            <p key={id}>{taskName} {taskDescription}</p>
+                        )
                     )
                 }
             </div>

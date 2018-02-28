@@ -21,7 +21,8 @@ class Tasks extends React.Component {
         this.setState({
             isDone: !this.state.isDone
         });
-        database().ref(`/tasks/${id}`).update({isDone: !this.state.isDone})
+        database().ref(`/tasks/${id}/`).update({
+            isDone: !this.state.isDone})
     }
 
 
@@ -34,7 +35,8 @@ class Tasks extends React.Component {
                 newState.push({
                     id: task,
                     taskName: tasks[task].taskName,
-                    taskDescription: tasks[task].taskDescription
+                    taskDescription: tasks[task].taskDescription,
+                    date: tasks[task].date
                 });
             }
             this.setState({
@@ -48,22 +50,23 @@ class Tasks extends React.Component {
             <div className='view'>
                 {
                     this.state.tasks && this.state.tasks.map(
-                        ({id, taskName, taskDescription}) => (
+                        ({id, taskName, taskDescription, date}) => (
                             <div>
-                                <p key={id}>{taskName}{taskDescription}</p>
+                                <p key={id}>{taskName}{taskDescription}{date}</p>
                                 <Button
                                     onClick={() => {
                                         this.handleRemoveTask(id)
                                     }}
                                 >Usuń</Button>
                                 <Button
+                                    active={this.state.isDone}
                                     onClick={() => {
                                         this.handleToggleDone(id)
                                     }}
                                 >{
                                     this.state.isDone ?
-                                        'mark as undone' :
-                                        'mark as done'
+                                        'undone' :
+                                        'done'
                                 }</Button>
                             </div>
                         )

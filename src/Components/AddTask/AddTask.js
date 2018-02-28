@@ -7,13 +7,14 @@ import {
 
 import {database} from '../../firebase'
 import './AddTask.css'
+import * as moment from 'moment'
 
 class AddTask extends React.Component {
 
     state = {
         id: '',
         taskName: '',
-        taskDescription: ''
+        taskDescription: '',
     }
 
     handleTaskNameInputChange = (event) => {
@@ -30,10 +31,12 @@ class AddTask extends React.Component {
 
 
     handleAddTask = () => {
+        let date = moment().format('MMMM Do YYYY, h:mm:ss a')
         database().ref(`tasks/`).push({
             taskName: this.state.taskName,
             taskDescription: this.state.taskDescription,
             isDone: false,
+            date: date
         })
     }
 
