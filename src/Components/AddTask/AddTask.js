@@ -30,7 +30,8 @@ class AddTask extends React.Component {
 
 
 
-    handleAddTask = () => {
+    handleAddTask = (event) => {
+        event.preventDefault()
         let date = moment().format('MMMM Do YYYY, h:mm:ss a')
         database().ref(`tasks/`).push({
             taskName: this.state.taskName,

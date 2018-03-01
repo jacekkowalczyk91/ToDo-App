@@ -74,7 +74,7 @@ class Tasks extends React.Component {
                                         'undone' :
                                         'done'
                                 }</Button>
-                                <EditTask/>
+                                <EditTask key={id}/>
                             </div>
                         )
                     )
