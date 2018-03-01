@@ -6,6 +6,8 @@ import {
 
 import {database} from '../../firebase'
 
+import EditTask from '../../Components/EditTask'
+
 class Tasks extends React.Component {
 
     state = {
@@ -17,12 +19,15 @@ class Tasks extends React.Component {
         database().ref(`/tasks/${id}`).set(null)
     }
 
-    handleToggleDone = (id) => {
+    handleToggleDone = (id, e) => {
+        if (e) e.preventDefault()
         this.setState({
             isDone: !this.state.isDone
         });
         database().ref(`/tasks/${id}/`).update({
-            isDone: !this.state.isDone})
+            isDone: !this.state.isDone
+        })
+        console.log(id)
     }
 
 
@@ -51,15 +56,16 @@ class Tasks extends React.Component {
                 {
                     this.state.tasks && this.state.tasks.map(
                         ({id, taskName, taskDescription, date}) => (
-                            <div>
-                                <p key={id}>{taskName}{taskDescription}{date}</p>
+                            <div key={id}>
+                                <p><label>Nazwa zadania:</label> {taskName}</p>
+                                <p><label>Treść zadania:</label> {taskDescription}</p>
+                                <p><label>Data dodania zadania </label> {date}</p>
                                 <Button
                                     onClick={() => {
                                         this.handleRemoveTask(id)
                                     }}
                                 >Usuń</Button>
                                 <Button
-                                    active={this.state.isDone}
                                     onClick={() => {
                                         this.handleToggleDone(id)
                                     }}
@@ -68,11 +74,11 @@ class Tasks extends React.Component {
                                         'undone' :
                                         'done'
                                 }</Button>
+                                <EditTask/>
                             </div>
                         )
                     )
                 }
-
             </div>
         )
     }
