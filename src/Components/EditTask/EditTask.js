@@ -12,29 +12,9 @@ import {
 class EditTask extends React.Component {
 
     state = {
-        id: '',
         show: false,
-        taskName: '',
-        taskDescription: ''
-    }
-
-    componentDidMount() {
-        const tasks = database().ref('tasks');
-        tasks.on('value', (snapshot) => {
-            let tasks = snapshot.val();
-            let newState = [];
-            for (let task in tasks) {
-                newState.push({
-                    id: task,
-                    taskName: tasks[task].taskName,
-                    taskDescription: tasks[task].taskDescription,
-                    date: tasks[task].date
-                });
-            }
-            this.setState({
-                tasks: newState
-            });
-        });
+        // taskName: '',
+        // taskDescription: ''
     }
 
     handleEditedTaskName = (event) => {
@@ -52,8 +32,8 @@ class EditTask extends React.Component {
     handleUpdateTask = (id) => {
 
         database().ref(`/tasks/${id}`).update({
-            taskName: this.state.taskName,
-            taskDescription: this.state.taskDescription
+            taskName: this.props.task.taskName,
+            taskDescription: this.props.task.taskDescription
         })
 
         this.setState({
@@ -67,17 +47,14 @@ class EditTask extends React.Component {
 
         return (
             <div>
-                <Button
-                    bsSize="xsmall"
-                    onClick={() => this.setState({show: true})}
-                >
-                    Edytuj
-                </Button>
                 {
-                    this.state.tasks && this.state.tasks.map(
-                        ({id}) => (
                             <div className="modal-container">
-
+                                <Button
+                                    data-task-id={this.props.task}
+                                    onClick={() => this.setState({show: true})}
+                                >
+                                    Edytuj
+                                </Button>
                                 <Modal
                                     show={this.state.show}
                                     onHide={close}
@@ -92,7 +69,7 @@ class EditTask extends React.Component {
                                             <form>
                                                 <FormGroup>
                                                     <FormControl type="text" placeholder="Nazwa zadania..."
-                                                                 value={this.state.taskName}
+                                                                 value={this.props.task.taskName}
                                                                  onChange={this.handleEditedTaskName}/>
                                                 </FormGroup>
                                                 <FormGroup controlId="formControlsTextarea">
@@ -100,20 +77,18 @@ class EditTask extends React.Component {
                                                                  style={{height: 100}}
                                                                  componentClass="textarea"
                                                                  placeholder="Opis zadania..."
-                                                                 value={this.state.taskDescription}/>
+                                                                 value={this.props.task.taskDescription}/>
                                                 </FormGroup>
                                             </form>
                                         </div>
                                     </Modal.Body>
                                     <Modal.Footer>
                                         <Button bsStyle="primary" onClick={() => {
-                                            this.handleUpdateTask(id)
+                                            this.handleUpdateTask(this.props.task.id)
                                         }}>Zapisz</Button>
                                     </Modal.Footer>
                                 </Modal>
                             </div>
-                        )
-                    )
                 }
             </div>
         )

@@ -76,7 +76,7 @@ class Tasks extends React.Component {
                                         'undone' :
                                         'done'
                                 }</Button>
-                                <EditTask/>
+                                <EditTask task={{id, taskName, taskDescription, date, isDone}}/>
                             </div>
                         )
                     )
