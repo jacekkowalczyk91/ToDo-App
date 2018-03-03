@@ -11,7 +11,7 @@ import EditTask from '../../Components/EditTask'
 class Tasks extends React.Component {
 
     state = {
-        id: '',
+        id: [],
         isDone: false
     }
 
@@ -41,7 +41,8 @@ class Tasks extends React.Component {
                     id: task,
                     taskName: tasks[task].taskName,
                     taskDescription: tasks[task].taskDescription,
-                    date: tasks[task].date
+                    date: tasks[task].date,
+                    isDone: tasks[task].isDone
                 });
             }
             this.setState({
@@ -55,7 +56,7 @@ class Tasks extends React.Component {
             <div className='view'>
                 {
                     this.state.tasks && this.state.tasks.map(
-                        ({id, taskName, taskDescription, date}) => (
+                        ({id, taskName, taskDescription, date, isDone}) => (
                             <div key={id}>
                                 <p><label>Nazwa zadania:</label> {taskName}</p>
                                 <p><label>Treść zadania:</label> {taskDescription}</p>
@@ -66,6 +67,7 @@ class Tasks extends React.Component {
                                     }}
                                 >Usuń</Button>
                                 <Button
+                                    key={isDone}
                                     onClick={() => {
                                         this.handleToggleDone(id)
                                     }}
@@ -74,7 +76,7 @@ class Tasks extends React.Component {
                                         'undone' :
                                         'done'
                                 }</Button>
-                                <EditTask key={id}/>
+                                <EditTask/>
                             </div>
                         )
                     )

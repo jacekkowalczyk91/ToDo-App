@@ -61,22 +61,23 @@ class EditTask extends React.Component {
         })
     }
 
-    render(){
+    render() {
 
-        let close = () => this.setState({ show: false });
+        let close = () => this.setState({show: false});
 
-        return(
+        return (
             <div>
+                <Button
+                    bsSize="xsmall"
+                    onClick={() => this.setState({show: true})}
+                >
+                    Edytuj
+                </Button>
                 {
                     this.state.tasks && this.state.tasks.map(
                         ({id}) => (
                             <div className="modal-container">
-                                <Button
-                                    bsSize="xsmall"
-                                    onClick={() => this.setState({ show: true })}
-                                >
-                                    Edytuj
-                                </Button>
+
                                 <Modal
                                     show={this.state.show}
                                     onHide={close}
