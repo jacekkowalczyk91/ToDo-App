@@ -19,15 +19,10 @@ class Tasks extends React.Component {
         database().ref(`/tasks/${id}`).set(null)
     }
 
-    handleToggleDone = (id, e) => {
-        if (e) e.preventDefault()
-        this.setState({
-            isDone: !this.state.isDone
-        });
+    handleToggleDone = (id, isDone) => {
         database().ref(`/tasks/${id}/`).update({
-            isDone: !this.state.isDone
+            isDone: !isDone
         })
-        console.log(id)
     }
 
 
@@ -67,12 +62,11 @@ class Tasks extends React.Component {
                                     }}
                                 >Usuń</Button>
                                 <Button
-                                    key={isDone}
                                     onClick={() => {
-                                        this.handleToggleDone(id)
+                                        this.handleToggleDone(id, isDone)
                                     }}
                                 >{
-                                    this.state.isDone ?
+                                    isDone ?
                                         'undone' :
                                         'done'
                                 }</Button>
