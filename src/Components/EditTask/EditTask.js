@@ -13,8 +13,8 @@ class EditTask extends React.Component {
 
     state = {
         show: false,
-        // taskName: '',
-        // taskDescription: ''
+        taskName: '',
+        taskDescription: ''
     }
 
     handleEditedTaskName = (event) => {
@@ -32,8 +32,8 @@ class EditTask extends React.Component {
     handleUpdateTask = (id) => {
 
         database().ref(`/tasks/${id}`).update({
-            taskName: this.props.task.taskName,
-            taskDescription: this.props.task.taskDescription
+            taskName: this.state.taskName,
+            taskDescription: this.state.taskDescription
         })
 
         this.setState({
@@ -50,7 +50,6 @@ class EditTask extends React.Component {
                 {
                             <div className="modal-container">
                                 <Button
-                                    data-task-id={this.props.task}
                                     onClick={() => this.setState({show: true})}
                                 >
                                     Edytuj
@@ -69,7 +68,7 @@ class EditTask extends React.Component {
                                             <form>
                                                 <FormGroup>
                                                     <FormControl type="text" placeholder="Nazwa zadania..."
-                                                                 value={this.props.task.taskName}
+                                                                 value={this.state.taskName}
                                                                  onChange={this.handleEditedTaskName}/>
                                                 </FormGroup>
                                                 <FormGroup controlId="formControlsTextarea">
@@ -77,15 +76,14 @@ class EditTask extends React.Component {
                                                                  style={{height: 100}}
                                                                  componentClass="textarea"
                                                                  placeholder="Opis zadania..."
-                                                                 value={this.props.task.taskDescription}/>
+                                                                 value={this.state.taskDescription}/>
                                                 </FormGroup>
                                             </form>
                                         </div>
                                     </Modal.Body>
                                     <Modal.Footer>
-                                        <Button bsStyle="primary" onClick={() => {
-                                            this.handleUpdateTask(this.props.task.id)
-                                        }}>Zapisz</Button>
+                                        <Button bsStyle="primary" onClick={() => {this.handleUpdateTask(this.props.task.id)}}
+                                        >Zapisz</Button>
                                     </Modal.Footer>
                                 </Modal>
                             </div>
