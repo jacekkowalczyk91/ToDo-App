@@ -39,6 +39,7 @@ class EditTask extends React.Component {
         this.setState({
             show: false
         })
+        console.log(this.props)
     }
 
     render() {
@@ -46,10 +47,11 @@ class EditTask extends React.Component {
         let close = () => this.setState({show: false});
 
         return (
-            <div>
+            <div className='edit-view'>
                 {
                             <div className="modal-container">
                                 <Button
+                                    bsStyle='info'
                                     onClick={() => this.setState({show: true})}
                                 >
                                     Edytuj

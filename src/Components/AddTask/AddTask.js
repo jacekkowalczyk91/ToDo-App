@@ -45,10 +45,11 @@ class AddTask extends React.Component {
 
         return (
             <div>
+                <div>
+                    <h3>Tutaj dodaj swoje zadanie</h3>
+                </div>
                 <form>
-                    <FormGroup
-                        className='form'
-                    >
+                    <FormGroup>
                         <FormControl
                             type='text'
                             placeholder='nazwa zadania'
@@ -62,6 +63,8 @@ class AddTask extends React.Component {
                             value={this.state.taskDescription}
                         />
                         <Button
+                            className='btn-add-task'
+                            // bsStyle='primary'
                             onClick={this.handleAddTask}
                         >Zapisz</Button>
                     </FormGroup>

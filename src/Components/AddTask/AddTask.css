@@ -1,8 +1,6 @@
 .form{
-    margin-left: 3%;
-    margin-top: 3%;
+    width: 40%;
 }
-.view{
-    float:right;
-    margin-right: 50%;
+.btn-add-task {
+    margin-left: 40%;
 }

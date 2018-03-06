@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap'
 
 import {database} from '../../firebase'
+import './Tasks.css'
 
 import EditTask from '../../Components/EditTask'
 
@@ -48,33 +49,41 @@ class Tasks extends React.Component {
 
     render() {
         return (
-            <div className='view'>
-                {
-                    this.state.tasks && this.state.tasks.map(
-                        ({id, taskName, taskDescription, date, isDone}) => (
-                            <div key={id}>
-                                <p><label>Nazwa zadania:</label> {taskName}</p>
-                                <p><label>Treść zadania:</label> {taskDescription}</p>
-                                <p><label>Data dodania zadania </label> {date}</p>
-                                <Button
-                                    onClick={() => {
-                                        this.handleRemoveTask(id)
-                                    }}
-                                >Usuń</Button>
-                                <Button
-                                    onClick={() => {
-                                        this.handleToggleDone(id, isDone)
-                                    }}
-                                >{
-                                    isDone ?
-                                        'undone' :
-                                        'done'
-                                }</Button>
-                                <EditTask task={{id, taskName, taskDescription, date, isDone}}/>
-                            </div>
+            <div className='opening'>
+                <h1>Lista zadań: </h1>
+                <div className='view'>
+                    {
+                        this.state.tasks && this.state.tasks.map(
+                            ({id, taskName, taskDescription, date, isDone}) => (
+                                <div className='task-view' key={id}>
+                                    <p className="task-name"><label>Nazwa zadania:</label> {taskName}</p>
+                                    <p className="task-desc"><label className="label-desc">Treść zadania:</label> {taskDescription}</p>
+                                    <p className="task-date"><label>Data dodania zadania </label> {date}</p>
+                                    <Button
+                                        bsStyle="danger"
+                                        className="delete-button"
+                                        onClick={() => {
+                                            this.handleRemoveTask(id)
+                                        }}
+                                    >Usuń</Button>
+                                    <Button
+                                        bsStyle="primary"
+                                        onClick={() => {
+                                            this.handleToggleDone(id, isDone)
+                                        }}
+                                    >{
+                                        isDone ?
+                                            'Niegotowe' :
+                                            'Gotowe'
+                                    }</Button>
+                                    <EditTask
+                                        bsStyle="info"
+                                        task={{id, taskName, taskDescription, date, isDone}}/>
+                                </div>
+                            )
                         )
-                    )
-                }
+                    }
+                </div>
             </div>
         )
     }
