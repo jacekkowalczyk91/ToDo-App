@@ -1,0 +1,42 @@
+.view {
+    display: grid;
+    display: -ms-grid;
+    grid-gap: 5px;
+    -ms-grid-gap: 5px;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.task-view {
+    border: 3px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 5px 5px 6px gray;
+}
+
+.task-name {
+    border-bottom: 2px solid crimson;
+}
+
+.task-date {
+    border-bottom: 2px solid crimson;
+}
+
+.label-desc {
+    border-bottom: 2px solid crimson;
+}
+
+.delete-button.btn.btn-danger {
+    margin-left: 10px;
+}
+.btn.btn-primary{
+    margin-left: 10px;
+}
+.edit-view{
+    display: inline-block;
+}
+.modal-container{
+    display: inline-block;
+    margin-left: 10px;
+}
