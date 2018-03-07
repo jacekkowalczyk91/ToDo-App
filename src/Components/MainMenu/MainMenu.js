@@ -13,15 +13,12 @@ import {
 const MainMenu = () => (
     <Navbar style={{BorderRadiusBottom:10,
         background: 'white',
-        width: '100%'
+        width: '100%',
     }}>
-        <Navbar.Header>
-
-        </Navbar.Header>
         <Navbar.Toggle/>
         <Navbar.Collapse>
             <Nav>
-                <LinkContainer exact to="/">
+                <LinkContainer  exact to="/">
                     <NavItem>Zadania</NavItem>
                 </LinkContainer>
                 <LinkContainer exact to="/AddTask">

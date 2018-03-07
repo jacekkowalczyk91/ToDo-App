@@ -49,22 +49,23 @@ class AddTask extends React.Component {
                     <h3>Tutaj dodaj swoje zadanie</h3>
                 </div>
                 <form>
-                    <FormGroup>
+                    <FormGroup className='form'>
                         <FormControl
+                            className='title'
                             type='text'
                             placeholder='nazwa zadania'
                             onChange={this.handleTaskNameInputChange}
                             value={this.state.taskName}
                         />
                         <FormControl
+                            className='task-desc'
                             type='textarea'
                             placeholder='treść zadania'
                             onChange={this.handleTaskDescriptionChange}
                             value={this.state.taskDescription}
                         />
                         <Button
-                            className='btn-add-task'
-                            // bsStyle='primary'
+                            bsStyle='success'
                             onClick={this.handleAddTask}
                         >Zapisz</Button>
                     </FormGroup>

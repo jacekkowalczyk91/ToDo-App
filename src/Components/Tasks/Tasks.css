@@ -40,3 +40,37 @@
     display: inline-block;
     margin-left: 10px;
 }
+.title.form-control{
+    width: 35%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.task-desc.form-control{
+    width: 35%;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.edit-view{
+    display: inline-block;
+}
+.modal-container{
+    display: inline-block;
+    margin-left: 10px;
+}
+.btn-success{
+
+    position: absolute;
+    top: 56%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+.add-hype{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+}
