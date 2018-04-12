@@ -30,16 +30,20 @@ class EditTask extends React.Component {
     }
 
     handleUpdateTask = (id) => {
+        if (this.state.taskName.length >= 1 && this.state.taskDescription.length >= 1) {
+            database().ref(`/tasks/${id}`).update({
+                taskName: this.state.taskName,
+                taskDescription: this.state.taskDescription
+            })
 
-        database().ref(`/tasks/${id}`).update({
-            taskName: this.state.taskName,
-            taskDescription: this.state.taskDescription
-        })
+            this.setState({
+                show: false
+            })
+        } else {
+            alert('Wpisz nazwę i/lub treść zadania')
 
-        this.setState({
-            show: false
-        })
-        console.log(this.props)
+        }
+
     }
 
     render() {
@@ -49,46 +53,48 @@ class EditTask extends React.Component {
         return (
             <div className='edit-view'>
                 {
-                            <div className="modal-container">
-                                <Button
-                                    bsStyle='info'
-                                    onClick={() => this.setState({show: true})}
-                                >
-                                    Edytuj
-                                </Button>
-                                <Modal
-                                    show={this.state.show}
-                                    onHide={close}
-                                    container={this}
-                                    aria-labelledby="contained-modal-title"
-                                >
-                                    <Modal.Header closeButton>
-                                        <Modal.Title id="contained-modal-title">Edytuj zadanie</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                        <div>
-                                            <form>
-                                                <FormGroup>
-                                                    <FormControl type="text" placeholder="Nazwa zadania..."
-                                                                 value={this.state.taskName}
-                                                                 onChange={this.handleEditedTaskName}/>
-                                                </FormGroup>
-                                                <FormGroup controlId="formControlsTextarea">
-                                                    <FormControl onChange={this.handleEditedTaskDesc}
-                                                                 style={{height: 100}}
-                                                                 componentClass="textarea"
-                                                                 placeholder="Opis zadania..."
-                                                                 value={this.state.taskDescription}/>
-                                                </FormGroup>
-                                            </form>
-                                        </div>
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                        <Button bsStyle="primary" onClick={() => {this.handleUpdateTask(this.props.task.id)}}
-                                        >Zapisz</Button>
-                                    </Modal.Footer>
-                                </Modal>
-                            </div>
+                    <div className="modal-container">
+                        <Button
+                            bsStyle='info'
+                            onClick={() => this.setState({show: true})}
+                        >
+                            Edytuj
+                        </Button>
+                        <Modal
+                            show={this.state.show}
+                            onHide={close}
+                            container={this}
+                            aria-labelledby="contained-modal-title"
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title id="contained-modal-title">Edytuj zadanie</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <div>
+                                    <form>
+                                        <FormGroup>
+                                            <FormControl type="text" placeholder="Nazwa zadania..."
+                                                         value={this.state.taskName}
+                                                         onChange={this.handleEditedTaskName}/>
+                                        </FormGroup>
+                                        <FormGroup controlId="formControlsTextarea">
+                                            <FormControl onChange={this.handleEditedTaskDesc}
+                                                         style={{height: 100}}
+                                                         componentClass="textarea"
+                                                         placeholder="Opis zadania..."
+                                                         value={this.state.taskDescription}/>
+                                        </FormGroup>
+                                    </form>
+                                </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button bsStyle="primary" onClick={() => {
+                                    this.handleUpdateTask(this.props.task.id)
+                                }}
+                                >Zapisz</Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
                 }
             </div>
         )
