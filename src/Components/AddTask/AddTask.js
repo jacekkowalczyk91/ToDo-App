@@ -53,7 +53,7 @@ class AddTask extends React.Component {
         return (
             <div>
                 <div>
-                    <h3>Tutaj dodaj swoje zadanie</h3>
+                    <h2>Tutaj dodaj swoje zadanie</h2>
                 </div>
                 <form>
                     <FormGroup
