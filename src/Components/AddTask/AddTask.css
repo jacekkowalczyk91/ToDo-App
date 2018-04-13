@@ -1,5 +1,11 @@
-h2{
+h2 {
     position: absolute;
     left: 30%;
     top: 30%;
+}
+
+@media (max-width: 500px) {
+    h2 {
+        top: 25%;
+    }
 }
